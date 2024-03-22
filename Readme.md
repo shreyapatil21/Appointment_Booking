@@ -1,13 +1,2 @@
-# Front End Internship 
-
-
-
-
-
-
-
-controllers - main functionality
-db - how to connect database
-middlewares - the code which we want to run in between client request and server response
-routes - all required APIs
-utils - utilities (file uploding, mailing, get tokens, etc)
+# Appointment_Booking
+Front End Project for getting Internship
