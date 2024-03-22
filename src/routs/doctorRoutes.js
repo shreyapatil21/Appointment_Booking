@@ -11,6 +11,6 @@ const doctorRoutes = express.Router();
 
 doctorRoutes.post('/register', createDoctorHandle );
 doctorRoutes.get('/appointment', getAllDoctorsHandle );
-doctorRoutes.get('/', getDoctorById );
+doctorRoutes.get('/:id', getDoctorById );
 
 export default doctorRoutes;
