@@ -50,7 +50,37 @@ async function getPatientById(req, res) {
     }
 }
 
+async function getPatients(req, res) {
+    const pid = req.params.pId;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10; // Default limit to 10 records per page
+
+    try {
+        const count = await Patient.countDocuments(); // Count total documents
+        const totalPages = Math.ceil(count / limit); // Calculate total pages
+        const skip = (page - 1) * limit; // Calculate the number of documents to skip
+
+        const patients = await Patient.find()
+            .skip(skip)
+            .limit(limit);
+
+        if (patients.length === 0) {
+            return res.status(404).json({ error: "No patients found" });
+        }
+
+        return res.json({
+            patients,
+            currentPage: page,
+            totalPages
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error while getting patients' });
+    }
+}
+
+
 export {
     createPatientHandle,
     getPatientById,
+    getPatients
 };

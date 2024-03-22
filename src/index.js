@@ -21,12 +21,18 @@ app.use(cookieParser());
 app.use(express.static('public'));
 
 //Use routes
+// app.use(cors());
 app.use(
     cors({
         credentials: true,
-        origin: `http://localhost:${process.env.FRONTEND_PORT}`,
+        methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+        origin: '*',
+allowedHeaders: [
+    'Content-Type',
+  ],    
     })
 );
+
 app.use("/patient", paitentRoutes);
 app.use("/doctor", doctorRoutes);
 app.use("/appointment",appointmentRoutes);
